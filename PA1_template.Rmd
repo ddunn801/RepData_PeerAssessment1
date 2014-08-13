@@ -1,8 +1,13 @@
 # Reproducible Research: Peer Assessment 1
 
 
+```{r setoptions,echo=TRUE,cache=FALSE}
+opts_chunk$set(echo=TRUE,cache=FALSE)
+```
+
+
 ## Loading and preprocessing the data
-```{r echo=TRUE,cache=FALSE}
+```{r loading}
 setwd("C:\\Users\\ddunn\\Dropbox\\DD Cloud\\Courses\\Coursera - Reproducible Research\\Week 1\\RepData_PeerAssessment1")
 d0 <- read.csv("activity.csv",header=TRUE,stringsAsFactors=FALSE)
 d1 <- d0
@@ -11,7 +16,7 @@ d1$date <- as.Date(d1$date)
 
 
 ## What is mean total number of steps taken per day?
-```{r echo=TRUE,cache=FALSE}
+```{r meansteps}
 dailySteps <- aggregate(steps~date,d1,sum)
 h1 <- hist(dailySteps$steps,xlab="Daily Steps",main="Histogram of Daily Steps",col="blue")
 h1
@@ -24,7 +29,7 @@ The median total number of steps daily is `r median(aggregate(steps~date,d1,sum)
 
 
 ## What is the average daily activity pattern?
-```{r echo=TRUE,cache=FALSE}
+```{r pattern}
 intervalSteps <- aggregate(steps~interval,d1,mean)
 plot(x=intervalSteps$interval,y=intervalSteps$steps,type="l",xlab="Interval",ylab="Average Steps",main="Average # of Steps by Interval")
 maxInterval <- intervalSteps$interval[which(intervalSteps$steps==max(intervalSteps$steps))]
@@ -36,7 +41,7 @@ The interval containing the maximum number of average daily steps is `r paste(ro
 
 
 ## Imputing missing values
-```{r echo=TRUE,cache=FALSE}
+```{r imputing}
 sum(is.na(d1$steps))
 
 d2 <- d1
@@ -56,7 +61,7 @@ Imputing missing values in this manner didn ot materially change the histogram's
 
 
 ## Are there differences in activity patterns between weekdays and weekends?
-```{r echo=TRUE,cache=FALSE}
+```{r differences}
 d2$date <- as.POSIXlt(d2$date)
 d2$DayType <- weekdays(d2$date)
 d2$DayType[d2$DayType %in% c("Sunday","Saturday")] <- "weekend"

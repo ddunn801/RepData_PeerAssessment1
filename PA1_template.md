@@ -1,6 +1,12 @@
 # Reproducible Research: Peer Assessment 1
 
 
+
+```r
+opts_chunk$set(echo=TRUE,cache=FALSE)
+```
+
+
 ## Loading and preprocessing the data
 
 ```r
@@ -18,7 +24,7 @@ dailySteps <- aggregate(steps~date,d1,sum)
 h1 <- hist(dailySteps$steps,xlab="Daily Steps",main="Histogram of Daily Steps",col="blue")
 ```
 
-![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2.png) 
+![plot of chunk meansteps](figure/meansteps.png) 
 
 ```r
 h1
@@ -84,7 +90,7 @@ paste(round(maxInterval/5)*5," to ",round(maxInterval/5)*5+5)
 abline(v=maxInterval)
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3.png) 
+![plot of chunk pattern](figure/pattern.png) 
 
 The interval containing the maximum number of average daily steps is 835  to  840.
 
@@ -109,7 +115,7 @@ dailySteps2 <- aggregate(steps~date,d2,sum)
 h2 <- hist(dailySteps2$steps,xlab="Daily Steps",main="Histogram of Daily Steps",col="blue")
 ```
 
-![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4.png) 
+![plot of chunk imputing](figure/imputing.png) 
 
 ```r
 h2
@@ -183,4 +189,4 @@ intervalStepsDT <- aggregate(steps~interval+DayType,d2,mean)
 xyplot(steps~interval|DayType,data=intervalStepsDT,type="l",main="Interval",xlab="Interval",ylab="Number of steps",layout=c(1,2))
 ```
 
-![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5.png) 
+![plot of chunk differences](figure/differences.png) 
